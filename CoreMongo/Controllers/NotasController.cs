@@ -22,7 +22,7 @@ namespace CoreMongo.Controllers
         public Nota Get(int id)
         {
             var contexto = new MongoDbContext();
-            var nota = contexto.Notas.Find(o => o.Titulo != "alala").FirstOrDefault();
+            var nota = contexto.Notas.Find(o => true).FirstOrDefault();
 
             return nota;
         }
