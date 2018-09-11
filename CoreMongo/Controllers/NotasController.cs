@@ -34,26 +34,18 @@ namespace CoreMongo.Controllers
             contexto.Notas.InsertOne(nota);
         }
 
-        // PUT: api/Notas/5
         [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] Nota item)
+        public void Put(Guid id, [FromBody] Nota nota)
         {
             var contexto = new MongoDbContext();
-            var nota = contexto.Notas.Find(o => o.Id == id).FirstOrDefault();
-
-            nota.Titulo = item.Titulo;
-            nota.Conteudo = item.Conteudo;
-            nota.Acessos = item.Acessos;
-
-            //contexto.Notas.UpdateOne(o => o.Id == id, nota);
+            contexto.Notas.ReplaceOne(o => o.Id == id, nota);
         }
 
-        // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             var contexto = new MongoDbContext();
-            //contexto.Notas.DeleteOne();
+            contexto.Notas.DeleteOne(o => o.Id == id);
         }
     }
 }
