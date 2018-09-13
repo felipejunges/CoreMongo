@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CoreMongo
+namespace CoreMongo.Models
 {
     public class Nota
     {

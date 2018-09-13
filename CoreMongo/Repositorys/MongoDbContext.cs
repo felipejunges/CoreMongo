@@ -1,14 +1,16 @@
-﻿using MongoDB.Driver;
+﻿using CoreMongo.Models;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 
-namespace CoreMongo
+namespace CoreMongo.Repositorys
 {
     public class MongoDbContext
     {
         public static string ConnectionString { get; set; }
         public static string DatabaseName { get; set; }
         public static bool IsSSL { get; set; }
-        private IMongoDatabase _database { get; }
+        public IMongoDatabase Database { get; }
 
         public MongoDbContext()
         {
@@ -20,7 +22,7 @@ namespace CoreMongo
                     settings.SslSettings = new SslSettings { EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 };
                 }
                 var mongoClient = new MongoClient(settings);
-                _database = mongoClient.GetDatabase(DatabaseName);
+                Database = mongoClient.GetDatabase(DatabaseName);
             }
             catch (Exception ex)
             {
@@ -32,7 +34,15 @@ namespace CoreMongo
         {
             get
             {
-                return _database.GetCollection<Nota>("Notas");
+                return Database.GetCollection<Nota>("Notas");
+            }
+        }
+
+        public IMongoCollection<BsonDocument> NotasDocs
+        {
+            get
+            {
+                return Database.GetCollection<BsonDocument>("Notasss");
             }
         }
     }

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreMongo.Models;
+using CoreMongo.Repositorys;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -31,7 +34,13 @@ namespace CoreMongo.Controllers
         public void Post([FromBody] Nota nota)
         {
             var contexto = new MongoDbContext();
-            contexto.Notas.InsertOne(nota);
+            //contexto.Notas.InsertOne(nota);
+
+            BsonDocument doc = new BsonDocument();
+            doc.Add("nome", "Maack");
+            doc.Add("linguagemFavorita", "C#");
+            doc.Add("linguagemQueMenosGosta", "Java");
+            contexto.NotasDocs.InsertOne(doc);
         }
 
         [HttpPut("{id}")]
