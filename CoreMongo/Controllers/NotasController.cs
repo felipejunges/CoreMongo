@@ -34,13 +34,13 @@ namespace CoreMongo.Controllers
         public void Post([FromBody] Nota nota)
         {
             var contexto = new MongoDbContext();
-            //contexto.Notas.InsertOne(nota);
+            contexto.Notas.InsertOne(nota);
 
-            BsonDocument doc = new BsonDocument();
-            doc.Add("nome", "Maack");
-            doc.Add("linguagemFavorita", "C#");
-            doc.Add("linguagemQueMenosGosta", "Java");
-            contexto.NotasDocs.InsertOne(doc);
+            //BsonDocument doc = new BsonDocument();
+            //doc.Add("nome", "Maack");
+            //doc.Add("linguagemFavorita", "C#");
+            //doc.Add("linguagemQueMenosGosta", "Java");
+            //contexto.NotasDocs.InsertOne(doc);
         }
 
         [HttpPut("{id}")]

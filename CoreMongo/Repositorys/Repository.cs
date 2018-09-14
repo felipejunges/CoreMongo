@@ -30,7 +30,7 @@ namespace CoreMongo.Repositorys
 
         public async Task Insert(T obj)
         {
-            _context.Database.GetCollection<T>("Notas").InsertOne(obj);
+            await _context.Database.GetCollection<T>("Notas").InsertOneAsync(obj);
         }
     }
 }
